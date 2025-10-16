@@ -78,3 +78,4 @@ C:\Softcom\RadarEmpresas\SoftshopAvalonia\SoftcomRadarEmpresas\obj\Debug\net48\S
 C:\Softcom\RadarEmpresas\SoftshopAvalonia\SoftcomRadarEmpresas\obj\Debug\net48\SoftcomR.218746F3.Up2Date
 C:\Softcom\RadarEmpresas\SoftshopAvalonia\SoftcomRadarEmpresas\obj\Debug\net48\SoftcomRadarEmpresas.exe
 C:\Softcom\RadarEmpresas\SoftshopAvalonia\SoftcomRadarEmpresas\obj\Debug\net48\SoftcomRadarEmpresas.pdb
+C:\Softcom\RadarEmpresas\SoftshopAvalonia\SoftcomRadarEmpresas\obj\Debug\net48\SoftcomRadarEmpresas.sourcelink.json
