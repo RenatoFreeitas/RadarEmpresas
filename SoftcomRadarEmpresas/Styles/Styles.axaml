@@ -1,0 +1,102 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+            <StackPanel VerticalAlignment="Center" Spacing="6">
+                <TextBlock>CalendarDatePicker</TextBlock>
+                <CalendarDatePicker />
+            </StackPanel>
+
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+    <Style Selector="CalendarDatePicker">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid ColumnDefinitions="Auto,Auto" VerticalAlignment="Center" >
+                        <MaskedTextBox x:Name="PART_TextBox"
+                                 BorderBrush="Gray"
+                                 BorderThickness="1,1,0,1"
+                                 CornerRadius="5,0,0,5"
+                                 FontFamily="Tahoma"
+                                 FontSize="12"
+                                 Width="85"
+                                 Height="30"
+                                 MinHeight="0"
+                                 VerticalAlignment="Center"
+                                 TextAlignment="Center"
+                                 Mask="00/00/0000"
+                                 Grid.Column="0">
+                        </MaskedTextBox>
+                        <Button x:Name="PART_Button"
+                                Content="📅"
+                                BorderBrush="Gray"
+                                BorderThickness="0,1,1,1"
+                                CornerRadius="0,5,5,0"
+                                Height="30"
+                                MinHeight="0"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource SecondaryBackground}"
+                                Grid.Column="1">
+                        </Button>
+                    </Grid>
+                    <Popup x:Name="PART_Popup"
+                           Placement="Bottom"
+                           IsLightDismissEnabled="True"
+                           IsOpen="{TemplateBinding IsDropDownOpen}">
+                            <Viewbox Stretch="Uniform"
+                                     Width="250"   
+                                     Height="230">
+                                <Border BorderThickness="1"
+                                        BorderBrush="Gray"
+                                        CornerRadius="4">
+                                <Calendar x:Name="PART_Calendar"
+                                          BorderThickness="1"
+                                          DisplayMode="Month"/>
+                                </Border>
+                            </Viewbox>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Border.Kpi">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}"/>
+        <Setter Property="Width" Value="243"/>
+        <Setter Property="Height" Value="90"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="BoxShadow" Value="0 4 12 Gray"/>
+    </Style>
+    
+    <Style Selector="TextBlock.KpiTitle">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#676767"/>
+    </Style>
+    
+    <Style Selector="TextBlock.KpiValue">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0 10 0 10"/>
+    </Style>
+    
+    <Style Selector="ComboBox.KpiTitle">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="#676767" /> 
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="Width" Value="195"/>
+    </Style>
+    
+</Styles>

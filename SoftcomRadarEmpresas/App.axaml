@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="SoftcomRadarEmpresas.App"
+             xmlns:local="using:SoftcomRadarEmpresas"
+             RequestedThemeVariant="Light">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://SoftcomRadarEmpresas/Styles/Styles.axaml" />
+    </Application.Styles>
+    
+    <Application.Resources>
+        <SolidColorBrush x:Key="PrimaryBackground">#f2f3f5</SolidColorBrush>
+        <SolidColorBrush x:Key="SecondaryBackground">White</SolidColorBrush>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="SoftcomRadarEmpresas/App.axaml" value="SoftcomRadarEmpresas/SoftcomRadarEmpresas.csproj" />
+        <entry key="SoftcomRadarEmpresas/Styles/Styles.axaml" value="SoftcomRadarEmpresas/SoftcomRadarEmpresas.csproj" />
+        <entry key="SoftcomRadarEmpresas/ViewModels/TemplatedControl1.axaml" value="SoftcomRadarEmpresas/SoftcomRadarEmpresas.csproj" />
+        <entry key="SoftcomRadarEmpresas/Views/GraficoSemanaView.axaml" value="SoftcomRadarEmpresas/SoftcomRadarEmpresas.csproj" />
+        <entry key="SoftcomRadarEmpresas/Views/MainWindow.axaml" value="SoftcomRadarEmpresas/SoftcomRadarEmpresas.csproj" />
+        <entry key="SoftcomRadarEmpresas/Views/Window1.axaml" value="SoftcomRadarEmpresas/SoftcomRadarEmpresas.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,347 @@
+<Window x:Class="SoftcomRadarEmpresas.Views.MainWindow"
+		xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SoftcomRadarEmpresas.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="using:SoftcomRadarEmpresas.Models"
+		xmlns:view="using:SoftcomRadarEmpresas.Views"
+        mc:Ignorable="d" 
+		d:DesignWidth="1280" 
+		d:DesignHeight="705"
+        x:DataType="vm:MainWindowViewModel"
+		Width="1280"
+		Height="705"
+		CanResize="False"
+		Background="{DynamicResource PrimaryBackground}"
+		WindowStartupLocation="CenterScreen"
+        Icon="/Assets/softcom-logo-ico.ico"
+        Title="{Binding WindowTitle}">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	
+	<ScrollViewer>
+		<Grid RowDefinitions="Auto,Auto,Auto,Auto" Margin="10" RowSpacing="10">
+			<!-- Linha 0: Filtros -->
+			<Border Grid.Row="0">
+				<Grid ShowGridLines="False" ColumnDefinitions="Auto,*" RowDefinitions="Auto,*" ColumnSpacing="40">
+					<TextBlock Text="Período" 
+					           FontSize="12" 
+					           FontWeight="Bold"/>
+					<StackPanel  Grid.Column="0" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+						<ComboBox SelectedIndex="0"
+						          x:Name="CboPeriodo"
+						          DropDownClosed="PeriodoChanged"
+						          Width="138"
+						          BorderBrush="Gray"
+						          BorderThickness="1"
+						          CornerRadius="5"
+						          Height="30"
+						          MinHeight="0"
+						          VerticalAlignment="Center"
+						          FontSize="12">
+							<ComboBoxItem Content="Hoje"/>
+							<ComboBoxItem Content="Ontem"/>
+							<ComboBoxItem Content="Últimos 7 dias"/>
+							<ComboBoxItem Content="Últimos 30 dias"/>
+							<ComboBoxItem Content="Mês Atual"/>
+							<ComboBoxItem Content="Últimos 3 meses"/>
+							<ComboBoxItem Content="Últimos 6 meses"/>
+							<ComboBoxItem Content="Ano"/>
+						</ComboBox>
+						<CalendarDatePicker SelectedDate="{Binding DataInicio}"
+						                    x:Name="TxtDataInicial"/>
+						<CalendarDatePicker SelectedDate="{Binding DataFinal}"
+						                    x:Name="TxtDataFinal"/>
+					</StackPanel>
+					
+					<StackPanel  Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+						<TextBlock x:Name="LblEmpresas"
+								   Text="{Binding LabelEmpresas}" 
+						           FontSize="12" 
+						           FontWeight="Bold"/>
+						
+						<TextBlock Text="limpar selecionados"
+						           PointerPressed="RemoverTodasEmpresas"
+						           Foreground="DodgerBlue"
+						           Cursor="Hand" 
+						           FontSize="12" 
+						           FontWeight="Bold"/>
+					</StackPanel>
+					
+					<Grid Grid.Column="1" Grid.Row="1" ColumnDefinitions="*,30" ColumnSpacing="10">
+						<Border x:Name="InputContainer" 
+						        BorderBrush="Gray" 
+						        BorderThickness="1" 
+						        CornerRadius="3" 
+						        Background="White" 
+						        Padding="5"
+						        Height="30"
+						        MinHeight="0"
+						        VerticalAlignment="Center"
+						        PointerPressed="InputContainer_PointerPressed">
+				            
+				            <DockPanel LastChildFill="True" >
+				                <Grid>
+				                    <TextBlock Text="{Binding PlaceholderTexto}" VerticalAlignment="Center" Foreground="Gray"
+				                               IsVisible="{Binding !SelecoesAtuais.Count}"
+				                               Height="30"
+				                               MinHeight="0"
+				                               Margin="0,12,0,0"/>
+				                    
+				                    <ItemsControl ItemsSource="{Binding SelecoesAtuais}" 
+				                                  IsVisible="{Binding SelecoesAtuais.Count}"
+				                                  Height="20"
+				                                  MinHeight="0"
+				                                  VerticalAlignment="Center">
+				                        <ItemsControl.ItemsPanel>
+				                            <ItemsPanelTemplate>
+				                                <WrapPanel /> 
+				                            </ItemsPanelTemplate>
+				                        </ItemsControl.ItemsPanel>
+				                        
+				                        <ItemsControl.ItemTemplate>
+				                            <DataTemplate x:DataType="m:Empresa">
+				                                <Border Background="#EEEEEE" 
+				                                        BorderBrush="Black"
+				                                        BorderThickness="1"
+				                                        CornerRadius="3" 
+				                                        Padding="3,2" 
+				                                        Margin="0,0,5,0" 
+				                                        VerticalAlignment="Center">
+				                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+				                                        <TextBlock Text="{Binding Nome}" 
+				                                                   FontSize="12" 
+				                                                   VerticalAlignment="Center"/>
+				                                        <Grid>
+					                                        <Button Click="RemoverEmpresa"
+					                                                VerticalAlignment="Center"
+					                                                Padding="0"
+					                                                Margin="2,0,0,0"
+					                                                Width="16"
+					                                                Height="16"
+					                                                Background="Transparent"
+					                                                HorizontalContentAlignment="Center"
+					                                                VerticalContentAlignment="Center"
+					                                                FontWeight="Bold">
+						                                        <Button.Styles>
+							                                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+								                                        <Setter Property="Background" Value="#FF5555" />
+							                                        </Style>
+							                                        <Style Selector="Button:pressed /template/ ContentPresenter">
+								                                        <Setter Property="Background" Value="Transparent" />
+								                                        <Setter Property="Opacity" Value="0.5" />
+							                                        </Style>
+							                                        <Style Selector="Button:pointerover PathIcon">
+								                                        <Setter Property="Foreground" Value="White"/>
+							                                        </Style>
+							                                        <Style Selector="Button:pressed PathIcon">
+								                                        <Setter Property="Foreground" Value="Black"/>
+							                                        </Style>
+						                                        </Button.Styles>
+						                                        <PathIcon
+							                                        Width="8"
+							                                        Height="8"
+							                                        Data="M16.4881 4.43057C16.8026 4.70014 16.839 5.17361 16.5695 5.48811L10.9879 12L16.0202 17.871C15.7183 18.2808 15.4653 18.7768 15.3381 19.3802L10.0001 13.1524L4.56946 19.4881C4.29989 19.8026 3.82641 19.839 3.51192 19.5695C3.19743 19.2999 3.161 18.8264 3.43057 18.5119L9.01225 12L3.43066 5.48812C3.1611 5.17363 3.19752 4.70015 3.51201 4.43058C3.82651 4.16102 4.29998 4.19744 4.56955 4.51193L10.0001 10.8475L15.4306 4.51192C15.7001 4.19743 16.1736 4.161 16.4881 4.43057Z" />
+					                                        </Button>
+				                                        </Grid>
+				                                    </StackPanel>
+				                                </Border>
+				                            </DataTemplate>
+				                        </ItemsControl.ItemTemplate>
+				                    </ItemsControl>
+				                </Grid>
+				            </DockPanel>
+				        </Border>
+				        <Popup Grid.Column="0" Placement="Bottom"
+				               x:Name="PopEmpresas"
+				               IsOpen="{Binding IsDropdownOpen}"
+				               WindowManagerAddShadowHint="False"
+				               PlacementTarget="{Binding ElementName=InputContainer}"
+				               Width="785">
+				            
+				            <Border Background="White" BorderBrush="DarkGray" BorderThickness="1">
+				                <ListBox x:Name="LbxEmpresas"
+										 ItemsSource="{Binding ListaEmpresas}" 
+				                         SelectionMode="Toggle"
+				                         SelectionChanged="ListBox_SelectionChanged"
+				                         SelectedItem="{x:Null}"
+										 FontSize="12">
+				                    <ListBox.ItemTemplate>
+					                    <DataTemplate x:DataType="m:Empresa">
+				                            <TextBlock Text="{Binding Nome}"/>
+				                        </DataTemplate>
+				                    </ListBox.ItemTemplate>
+				                </ListBox>
+				            </Border>
+				        </Popup>
+						<Button
+							Grid.Column="1"
+							Width="30"
+							Height="30"
+							Command="{Binding PesquisarCommand}"
+							Background="#FF7F00"
+							BorderThickness="0"
+							ToolTip.Tip="Aplicar Filtros">
+							<Button.Styles>
+								<Style Selector="Button:pointerover /template/ ContentPresenter">
+									<Setter Property="Background" Value="#FF9F33" />
+								</Style>
+								<Style Selector="Button:pressed /template/ ContentPresenter">
+									<Setter Property="Background" Value="#CC6600" />
+									<Setter Property="Opacity" Value="0.5" />
+								</Style>
+							</Button.Styles>
+							<PathIcon
+								Width="12"
+								Height="12"
+								Foreground="White"
+								Data="M15.5,14h-.79l-.28-.27A6.471,6.471,0,0,0,16,9.5,6.5,6.5,0,1,0,9.5,16a6.471,6.471,0,0,0,4.23-1.57l.27.28v.79l5,4.99L20.49,19ZM9.5,14A4.5,4.5,0,1,1,14,9.5,4.5,4.5,0,0,1,9.5,14Z" />
+						</Button>
+					</Grid>
+				</Grid>
+			</Border>
+
+			<!-- Linha 1: KPIs -->
+			<StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+				<!-- FATURAMENTO TOTAL -->
+				<Border Classes="Kpi">
+					<Grid RowDefinitions="*,*" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+						<Grid ColumnDefinitions="*,Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+						<TextBlock Grid.Column="0" Grid.Row="0"
+						           Classes="KpiTitle"
+						           Text="FATURAMENTO TOTAL"/>
+
+						<PathIcon Grid.Column="1" Grid.Row="0"
+						          Foreground="#0ecd71"
+								  Data="M444-200h70v-50q50-9 86-39t36-89q0-42-24-77t-96-61q-60-20-83-35t-23-41q0-26 18.5-41t53.5-15q32 0 50 15.5t26 38.5l64-26q-11-35-40.5-61T516-710v-50h-70v50q-50 11-78 44t-28 74q0 47 27.5 76t86.5 50q63 23 87.5 41t24.5 47q0 33-23.5 48.5T486-314q-33 0-58.5-20.5T390-396l-66 26q14 48 43.5 77.5T444-252v52Zm36 120q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+						</Grid>
+						<TextBlock Grid.Row="1"
+						           Classes="KpiValue"
+						           Text="R$ 10.582.602,67"/>
+					</Grid>
+				</Border>
+				<!-- VENDA HOJE -->
+				<Border Classes="Kpi">
+					<Grid RowDefinitions="*,*" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+						<Grid ColumnDefinitions="*,Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+							<TextBlock Grid.Column="0" Grid.Row="0"
+							           Classes="KpiTitle"
+							           Text="VENDA HOJE"/>
+
+							<PathIcon Grid.Column="1" Grid.Row="0"
+							          Foreground="#0ecd71"
+							          Data="M444-200h70v-50q50-9 86-39t36-89q0-42-24-77t-96-61q-60-20-83-35t-23-41q0-26 18.5-41t53.5-15q32 0 50 15.5t26 38.5l64-26q-11-35-40.5-61T516-710v-50h-70v50q-50 11-78 44t-28 74q0 47 27.5 76t86.5 50q63 23 87.5 41t24.5 47q0 33-23.5 48.5T486-314q-33 0-58.5-20.5T390-396l-66 26q14 48 43.5 77.5T444-252v52Zm36 120q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+						</Grid>
+						<TextBlock Grid.Row="1"
+						           Classes="KpiValue"
+						           Text="R$ 10.678,67"/>
+					</Grid>
+				</Border>
+				<!-- TICKET MEDIO -->
+				<Border Classes="Kpi">
+					<Grid RowDefinitions="*,*" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+						<Grid ColumnDefinitions="*,Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+							<ComboBox Grid.Column="0" Grid.Row="0"
+							          Classes="KpiTitle"
+							          SelectedIndex="0">
+								<ComboBoxItem Classes="KpiTitle"
+								              Content="TICKET MÉDIO"/>
+								<ComboBoxItem Classes="KpiTitle"
+								              Content="TICKET MÉDIO - PRODUTOS"/>
+								<ComboBoxItem Classes="KpiTitle"
+								              Content="TICKET MÉDIO - SERVIÇOS"/>
+								<ComboBox.Styles>
+									<Style Selector="ComboBox:pointerover /template/ ContentPresenter">
+										<Setter Property="Background" Value="#007ACC" /> 
+									</Style>
+								</ComboBox.Styles>
+							</ComboBox>
+
+							<PathIcon Grid.Column="1" Grid.Row="0"
+							          Foreground="#0ecd71"
+							          Data="M444-200h70v-50q50-9 86-39t36-89q0-42-24-77t-96-61q-60-20-83-35t-23-41q0-26 18.5-41t53.5-15q32 0 50 15.5t26 38.5l64-26q-11-35-40.5-61T516-710v-50h-70v50q-50 11-78 44t-28 74q0 47 27.5 76t86.5 50q63 23 87.5 41t24.5 47q0 33-23.5 48.5T486-314q-33 0-58.5-20.5T390-396l-66 26q14 48 43.5 77.5T444-252v52Zm36 120q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+						</Grid>
+						<TextBlock Grid.Row="1"
+						           Classes="KpiValue"
+						           Text="R$ 203,56"/>
+					</Grid>
+				</Border>
+				<!-- PEDIDOS HOJE -->
+				<Border Classes="Kpi">
+					<Grid RowDefinitions="*,*" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+						<Grid ColumnDefinitions="*,Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+							<TextBlock Grid.Column="0" Grid.Row="0"
+							           Classes="KpiTitle"
+							           Text="PEDIDOS HOJE"/>
+
+							<PathIcon Grid.Column="1" Grid.Row="0"
+							          Foreground="#4150e6"
+							          Data="M240-360h280l80-80H240v80Zm0-160h240v-80H240v80Zm-80-160v400h280l-80 80H80v-560h800v120h-80v-40H160Zm756 212q5 5 5 11t-5 11l-36 36-70-70 36-36q5-5 11-5t11 5l48 48ZM520-120v-70l266-266 70 70-266 266h-70ZM160-680v400-400Z"/>
+						</Grid>
+						<TextBlock Grid.Row="1"
+						           Classes="KpiValue"
+						           Text="305"/>
+					</Grid>
+				</Border>
+				<!-- PEDIDOS PERÍODO -->
+				<Border Classes="Kpi">
+					<Grid RowDefinitions="*,*" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+						<Grid ColumnDefinitions="*,Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+							<TextBlock Grid.Column="0" Grid.Row="0"
+							           Classes="KpiTitle"
+							           Text="PEDIDOS PERÍODO"/>
+
+							<PathIcon Grid.Column="1" Grid.Row="0"
+							          Foreground="#4150e6"
+							          Data="M240-360h280l80-80H240v80Zm0-160h240v-80H240v80Zm-80-160v400h280l-80 80H80v-560h800v120h-80v-40H160Zm756 212q5 5 5 11t-5 11l-36 36-70-70 36-36q5-5 11-5t11 5l48 48ZM520-120v-70l266-266 70 70-266 266h-70ZM160-680v400-400Z"/>
+						</Grid>
+						<TextBlock Grid.Row="1"
+						           Classes="KpiValue"
+						           Text="4345"/>
+					</Grid>
+				</Border>
+			</StackPanel>
+
+			<!-- Linha 2: Expanders -->
+			<StackPanel Grid.Row="2" Spacing="5">
+				<Border CornerRadius="6"
+				        BorderThickness="0"
+				        Background="{DynamicResource SecondaryBackground}"
+				        BoxShadow="0 4 12 Gray">
+					<Expander VerticalAlignment="Top"
+					          CornerRadius="6"
+					          Background="{DynamicResource SecondaryBackground}"
+					          BorderThickness="0"
+					          HorizontalAlignment="Stretch">
+						<Expander.Header>
+							Hidden Search
+						</Expander.Header>
+						<Grid RowDefinitions="*,*" ColumnDefinitions="150,*">
+							<TextBlock Grid.Row="0" Grid.Column="0"
+							           VerticalAlignment="Center">Search</TextBlock>
+							<TextBox Grid.Row="0" Grid.Column="1"
+							         Watermark="Search text" Width="200" />
+							<TextBlock Grid.Row="1" Grid.Column="0"
+							           VerticalAlignment="Center">Case sensitive?</TextBlock>
+							<CheckBox Grid.Row="1" Grid.Column="1" />
+						</Grid>
+					</Expander>
+				</Border>
+			</StackPanel>
+
+			<!-- Linha 3: Gráfico -->
+			<Border Grid.Row="3" 
+			        Background="{DynamicResource SecondaryBackground}" 
+			        CornerRadius="6" 
+			        Padding="10"
+			        BorderThickness="0"
+			        BoxShadow="0 4 12 Gray">
+				<!-- gráfico -->
+				<view:GraficoSemanaView/>
+			</Border>
+		</Grid>
+	</ScrollViewer>
+</Window>

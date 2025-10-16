@@ -1,0 +1,27 @@
+is_global = true
+build_property.AvaloniaNameGeneratorIsEnabled = true
+build_property.AvaloniaNameGeneratorBehavior = InitializeComponent
+build_property.AvaloniaNameGeneratorDefaultFieldModifier = internal
+build_property.AvaloniaNameGeneratorFilterByPath = *
+build_property.AvaloniaNameGeneratorFilterByNamespace = *
+build_property.AvaloniaNameGeneratorViewFileNamingStrategy = NamespaceAndClassName
+build_property.AvaloniaNameGeneratorAttachDevTools = true
+build_property.RootNamespace = SoftcomRadarEmpresas
+build_property.ProjectDir = C:\Softcom\RadarEmpresas\SoftshopAvalonia\SoftcomRadarEmpresas\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Softcom/RadarEmpresas/SoftshopAvalonia/SoftcomRadarEmpresas/App.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Softcom/RadarEmpresas/SoftshopAvalonia/SoftcomRadarEmpresas/Styles/Styles.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Softcom/RadarEmpresas/SoftshopAvalonia/SoftcomRadarEmpresas/Views/GraficoSemanaView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Softcom/RadarEmpresas/SoftshopAvalonia/SoftcomRadarEmpresas/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
